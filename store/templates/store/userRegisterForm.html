@@ -1,0 +1,51 @@
+{% extends  'store/main.html' %}
+{% load static %}
+
+{%  block content  %}
+<div class="container px-5 my-5">
+    <form id="contactForm" action="{% url 'userRegisterForm' %}" data-sb-form-api-token="API_TOKEN" method = 'POST'>
+        {% csrf_token %}
+
+        <div class="form-floating mb-3">
+            {{ form.username }}
+            {{ form.username.label_tag }}
+            <div class="invalid-feedback" data-sb-feedback="username:required">Username is required.</div>
+        </div>
+         <div class="form-floating mb-3">
+            {{ form.name }}
+            {{ form.name.label_tag }}
+            <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
+        </div>
+      
+        <div class="form-floating mb-3">
+           
+            {{ form.email }}
+            {{ form.email.label_tag }}
+            <div class="invalid-feedback" data-sb-feedback="email:required">Email is required.</div>
+            <div class="invalid-feedback" data-sb-feedback="email:email">Email Email is not valid.</div>
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.password }}
+            {{ form.password.label_tag }}
+            <div class="invalid-feedback" data-sb-feedback="password:required">password is required.</div>
+        </div>
+      
+        <div class="d-none" id="submitSuccessMessage">
+            <div class="text-center mb-3">
+                <div class="fw-bolder">Form submission successful!</div>
+                <p>To activate this form, sign up at</p>
+                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+            </div>
+        </div>
+        <div class="d-none" id="submitErrorMessage">
+            <div class="text-center text-danger mb-3">Error sending message!</div>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg" >Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+
+
+

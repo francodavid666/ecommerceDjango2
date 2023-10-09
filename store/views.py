@@ -1,13 +1,79 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
+from .forms import *
 from django.http import JsonResponse
 import json
 import datetime
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 from . utils import cookieCart, cartData, guestOrder
 
 # Create your views here.
+
+def userRegisterForm(request):
+    if request.method == 'POST':
+        form =  CustomerForm(request.POST)
+        
+        
+        if form.is_valid():
+            # Crear un nuevo Customer
+            customer = form.save(commit=False)
+           
+             # Obtener datos del formulario relacionados con el usuario
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+
+            # Crear un usuario y establecer la relación con el cliente
+            customer.create_user(username, password,email)            
+
+           #messages.success (request,'¡Usuario creado creado!')
+            print(form.cleaned_data)
+            return redirect('store')
+        else:
+            print(form.errors)
+            return redirect('userRegisterForm')
+    else:
+        
+        form =  CustomerForm()
+        context = {'form':form}
+        return render (request,'store/userRegisterForm.html',context)
+
+
+  
+
+
+#LOGIN
+def userLoginForm(request):
+    if request.method =='POST':
+        form=UserLoginForm(request,data=request.POST)
+        if form.is_valid():
+           
+            username = request.POST["username"]
+            password =request.POST["password"]
+
+            usuario = authenticate(username = username, password = password)
+            if usuario is not None:
+                login(request,usuario)
+                return redirect('store')
+            else:
+                print(form.cleaned_data)
+                return redirect('userLoginForm')
+
+        else:
+            print(form.errors)
+            form = UserLoginForm()
+            context = {'form':form}
+            return render (request,'store/userLoginForm.html',context)
+    else:
+        form = UserLoginForm()
+        context = {'form':form}
+        return render (request,'store/userLoginForm.html',context)
+
+
+
 
 def store (request):
 
@@ -108,4 +174,5 @@ def processOrder(request):
             )
 
     return JsonResponse('Payment complete', safe = False)
+
 

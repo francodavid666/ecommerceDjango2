@@ -141,3 +141,5 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = ["http://*","https://ecommerce1.up.railway.app"]
+
+LOGOUT_REDIRECT_URL = 'store'
