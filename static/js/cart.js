@@ -90,3 +90,24 @@ function slideImage(){
 }
 
 window.addEventListener('resize', slideImage);
+
+
+
+const btnLogout = document.getElementById('btnLogout')
+const btnRegister = document.getElementById('btnRegister')
+const btnLogin = document.getElementById('btnLogin')
+
+  if(user == 'AnonymousUser'){
+    btnLogout.classList.add('hidden')
+    btnRegister.classList.remove('hidden')
+    btnLogin.classList.remove('hidden')
+
+  }
+  else{
+
+    btnLogout.classList.revome('hidden')
+    btnRegister.classList.add('hidden')
+    btnLogin.classList.add('hidden')
+   
+    
+  }
