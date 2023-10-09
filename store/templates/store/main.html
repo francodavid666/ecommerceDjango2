@@ -89,7 +89,7 @@ console.log('user', user)
 
 
           <div class="form-inline my-2 my-lg-0">
-            <h4 class="mx-3 ">{{user}}</h4>
+            <h4 class="mx-3 " id="userTitle">{{user}}</h4>
             <a href="{% url 'userLoginForm' %}" class="btn btn-primary mr-4 hidden"  id="btnLogin">Login</a>
             <br>
             <a href="{% url 'logout' %}" class="btn btn-warning" id="btnLogout" >Logout</a>

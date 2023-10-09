@@ -96,11 +96,13 @@ window.addEventListener('resize', slideImage);
 const btnLogout = document.getElementById('btnLogout')
 const btnRegister = document.getElementById('btnRegister')
 const btnLogin = document.getElementById('btnLogin')
+const userTitle = document.getElementById('userTitle')
 
   if(user == 'AnonymousUser'){
     btnLogout.classList.add('hidden')
     btnRegister.classList.remove('hidden')
     btnLogin.classList.remove('hidden')
+    userTitle.classList.add('hidden')
 
   }
   else{
@@ -108,6 +110,7 @@ const btnLogin = document.getElementById('btnLogin')
     btnLogout.classList.revome('hidden')
     btnRegister.classList.add('hidden')
     btnLogin.classList.add('hidden')
+    userTitle.classList.remove('hidden')
    
     
   }
